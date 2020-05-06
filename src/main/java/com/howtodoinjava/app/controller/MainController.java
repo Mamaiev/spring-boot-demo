@@ -16,7 +16,7 @@ public class MainController {
     public static void main(String[] args) throws IOException, ImageProcessingException, MetadataException {
         long startTime = new Date().getTime();
 //        File folder = new File("/Users/mac/IdeaProjects/spring-boot-demo/files/");
-        File folder = new File("/Volumes/Untitled/iphone/Canary Island");
+        File folder = new File("/Users/mac/IdeaProjects/spring-boot-demo/files/");
         if (folder.listFiles() == null) {
             System.out.println(String.format("Directory '%s not found.", folder));
             return;
