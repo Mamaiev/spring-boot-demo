@@ -5,6 +5,7 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
+import com.howtodoinjava.app.model.Photo;
 
 import java.io.File;
 import java.io.IOException;
