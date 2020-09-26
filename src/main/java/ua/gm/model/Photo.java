@@ -1,4 +1,4 @@
-package com.howtodoinjava.app.model;
+package ua.gm.model;
 
 public class Photo {
 

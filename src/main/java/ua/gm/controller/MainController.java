@@ -1,11 +1,12 @@
-package com.howtodoinjava.app.controller;
+package ua.gm.controller;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
-import com.howtodoinjava.app.model.Photo;
+import org.springframework.stereotype.Service;
+import ua.gm.model.Photo;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,14 +14,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class MainController {
-    public static void main(String[] args) throws IOException, ImageProcessingException, MetadataException {
+
+    public String main() throws IOException, ImageProcessingException, MetadataException {
         long startTime = new Date().getTime();
 //        File folder = new File("/Users/mac/IdeaProjects/spring-boot-demo/files/");
         File folder = new File("/Users/mac/IdeaProjects/spring-boot-demo/files/");
         if (folder.listFiles() == null) {
-            System.out.println(String.format("Directory '%s not found.", folder));
-            return;
+            return String.format("Directory '%s not found.", folder);
         }
         List<String> result = new ArrayList<>();
         File file = null;
@@ -50,9 +52,10 @@ public class MainController {
         System.out.println();
         System.out.println("List size is " + list.size());
         System.out.println("Time is " + (new Date().getTime() - startTime));
+        return "Ok";
     }
 
-    public static void searchPathToFile(final String pattern, final File folder, List<String> result) {
+    public void searchPathToFile(final String pattern, final File folder, List<String> result) {
         for (final File f : folder.listFiles()) {
 
             if (f.isDirectory()) {
