@@ -1,10 +1,24 @@
 package ua.gm.model;
 
+import javax.persistence.*;
+
+//@Table(name = "photo")
+@Entity
 public class Photo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column
     private String name;
-    private String l; // TODO: refactoring name of variable
-    private String a;
+    @Column
+    private String longitude; // TODO: refactoring name of variable
+    @Column
+    private String latitude;
+    @Column
+    private String hash;
+    @Column
+    private long size;
 
     public String getName() {
         return name;
@@ -14,27 +28,43 @@ public class Photo {
         this.name = name;
     }
 
-    public String getL() {
-        return l;
+    public String getLongitude() {
+        return longitude;
     }
 
-    public void setL(String l) {
-        if (l != null) {
-            this.l = l.replace(",", ".");
+    public void setLongitude(String longitude) {
+        if (longitude != null) {
+            this.longitude = longitude.replace(",", ".");
         } else {
-            this.l = null;
+            this.longitude = null;
         }
     }
 
-    public String getA() {
-        return a;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setA(String a) {
-        if (a != null) {
-            this.a = a.replace(",", ".");
+    public void setLatitude(String latitude) {
+        if (latitude != null) {
+            this.latitude = latitude.replace(",", ".");
         } else {
-            this.a = null;
+            this.latitude = null;
         }
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
     }
 }

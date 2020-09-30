@@ -1,26 +1,26 @@
 package ua.gm.controller;
 
-import com.drew.imaging.ImageProcessingException;
-import com.drew.metadata.MetadataException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+import ua.gm.interfaces.FinderPhoto;
 
 import java.io.IOException;
 
 @Controller
 public class IndexController {
 
-    private MainController mainController;
+    private FinderPhoto finderPhoto;
 
-    @Autowired
-    public IndexController(MainController mainController) {
-        this.mainController = mainController;
+
+    public IndexController(FinderPhoto finderPhoto) {
+        this.finderPhoto = finderPhoto;
     }
 
     @GetMapping("/")
-    public String next() throws ImageProcessingException, MetadataException, IOException {
-        mainController.main();
+    public String next(ModelAndView model) throws IOException {
+        finderPhoto.findPhoto();
+        model.addObject("message", "omen");
         return "next";
     }
 
