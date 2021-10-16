@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Photo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Integer id;
     @Column
     private String name;
@@ -16,9 +16,17 @@ public class Photo {
     @Column
     private String latitude;
     @Column
-    private String hash;
+    private int hash;
     @Column
     private long size;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -52,11 +60,11 @@ public class Photo {
         }
     }
 
-    public String getHash() {
+    public int getHash() {
         return hash;
     }
 
-    public void setHash(String hash) {
+    public void setHash(int hash) {
         this.hash = hash;
     }
 

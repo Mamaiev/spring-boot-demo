@@ -26,6 +26,7 @@ public class IosFinderPhotoImpl implements FinderPhoto {
 
     public void findPhoto() throws IOException {
         long startTime = new Date().getTime();
+//        File folder = new File("/Users/mac/Downloads");
         File folder = new File("/Users/mac/IdeaProjects/spring-boot-demo/files/");
         if (folder.listFiles() == null) {
             System.out.println(String.format("Directory '%s not found.", folder));
@@ -33,13 +34,14 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         List<String> result = new ArrayList<>();
         File file = null;
         List<Photo> list = new ArrayList<>();
-        searchPathToFile(".*\\.(J|j)?(P|p)?(G|g)?", folder, result);
+        searchPathToFile(".*\\.(J|j|H|h)?(P|p|E|e)?(G|g|I|i)?(C|c){0,1}", folder, result);
         Photo photo = new Photo();
         for (String path : result) {
             photo = new Photo();
             file = new File(path);
             photo.setName(file.getName());
             photo.setSize(file.length());
+            photo.setHash(hash(file.getName(), file.length()));
             try {
                 Metadata metadata = ImageMetadataReader.readMetadata(file);
                 for (Directory meta : metadata.getDirectories()) {
@@ -50,6 +52,7 @@ public class IosFinderPhotoImpl implements FinderPhoto {
                 }
             } catch (ImageProcessingException e) {
                 e.printStackTrace();
+                System.out.println("Failed " + file.getName());
             }
             list.add(photo);
         }
@@ -75,6 +78,10 @@ public class IosFinderPhotoImpl implements FinderPhoto {
                 }
             }
         }
+    }
+
+    private int hash(String name, long size){
+        return (name + size).hashCode();
     }
 
 }
