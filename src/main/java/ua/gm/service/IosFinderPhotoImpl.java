@@ -31,12 +31,12 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         if (folder.listFiles() == null) {
             System.out.println(String.format("Directory '%s not found.", folder));
         }
-        List<String> result = new ArrayList<>();
+        List<String> listOfFiles = new ArrayList<>();
         File file = null;
         List<Photo> list = new ArrayList<>();
-        searchPathToFile(".*\\.(J|j|H|h)?(P|p|E|e)?(G|g|I|i)?(C|c){0,1}", folder, result);
+        searchPathToFile(".*\\.(J|j|H|h)?(P|p|E|e)?(G|g|I|i)?(C|c){0,1}", folder, listOfFiles);
         Photo photo = new Photo();
-        for (String path : result) {
+        for (String path : listOfFiles) {
             photo = new Photo();
             file = new File(path);
             photo.setName(file.getName());
@@ -60,9 +60,8 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         for (Photo p : list) {
             System.out.println(p.getName() + "  " + p.getLatitude() + "  " + p.getLongitude() + "  " + p.getSize());
         }
-        System.out.println();
-        System.out.println("List size is " + list.size());
-        System.out.println(String.format("Time is %sms", (new Date().getTime() - startTime)));
+
+        printTime(startTime, list.size());
     }
 
     private void searchPathToFile(final String pattern, final File folder, List<String> result) {
@@ -82,6 +81,60 @@ public class IosFinderPhotoImpl implements FinderPhoto {
 
     private int hash(String name, long size){
         return (name + size).hashCode();
+    }
+
+    public void checkDuplicate() {
+        long startTime = new Date().getTime();
+//        File folder = new File("/Users/mac/Downloads");
+        File folder = new File("/Users/mac/IdeaProjects/spring-boot-demo/files/");
+        if (folder.listFiles() == null) {
+            System.out.println(String.format("Directory '%s not found.", folder));
+        }
+        List<String> listOfFiles = new ArrayList<>();
+        File file = null;
+        List<Photo> list = new ArrayList<>();
+        searchPathToFile(".*\\.(J|j|H|h)?(P|p|E|e)?(G|g|I|i)?(C|c){0,1}", folder, listOfFiles);
+        List<String> listDup = new ArrayList<>();
+        for (String path : listOfFiles) {
+            Photo photo = new Photo();
+            file = new File(path);
+            photo.setSize(file.length());
+            photo.setName(file.getName());
+            if (list.stream().anyMatch(m -> m.getSize().equals(photo.getSize()))) {
+                listDup.add(path);
+            } else {
+                list.add(photo);
+            }
+        }
+        printTime(startTime, listDup.size());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void printTime(long startTime, int sizeOfList) {
+        System.out.println();
+        System.out.println("List size is " + sizeOfList);
+        System.out.println(String.format("Time is %sms", (new Date().getTime() - startTime)));
     }
 
 }

@@ -18,7 +18,7 @@ public class Photo {
     @Column
     private int hash;
     @Column
-    private long size;
+    private Long size;
 
     public Integer getId() {
         return id;
@@ -68,11 +68,11 @@ public class Photo {
         this.hash = hash;
     }
 
-    public long getSize() {
+    public Long getSize() {
         return size;
     }
 
-    public void setSize(long size) {
+    public void setSize(Long size) {
         this.size = size;
     }
 }

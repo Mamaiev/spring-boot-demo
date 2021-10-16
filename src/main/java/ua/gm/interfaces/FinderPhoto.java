@@ -5,4 +5,6 @@ import java.io.IOException;
 public interface FinderPhoto {
 
     void findPhoto() throws IOException;
+
+    void checkDuplicate();
 }

@@ -24,4 +24,11 @@ public class IndexController {
         return "next";
     }
 
+    @GetMapping("/checkDuplicate")
+    public String checkDuplicate(ModelAndView model) throws IOException {
+        finderPhoto.checkDuplicate();
+        model.addObject("message", "omen");
+        return "next";
+    }
+
 }
