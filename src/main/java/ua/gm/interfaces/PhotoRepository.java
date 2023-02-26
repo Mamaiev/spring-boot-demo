@@ -7,5 +7,4 @@ import ua.gm.model.Photo;
 @Repository
 public interface PhotoRepository extends CrudRepository<Photo, Integer> {
 
-
 }

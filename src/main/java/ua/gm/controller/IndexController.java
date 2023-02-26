@@ -1,34 +1,41 @@
 package ua.gm.controller;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 import ua.gm.interfaces.FinderPhoto;
+import ua.gm.interfaces.PhotoRepository;
+import ua.gm.model.Photo;
 
-import java.io.IOException;
-
-@Controller
+@RestController
 public class IndexController {
 
     private FinderPhoto finderPhoto;
 
+    private PhotoRepository photoRepository;
 
-    public IndexController(FinderPhoto finderPhoto) {
+    public IndexController(FinderPhoto finderPhoto, PhotoRepository photoRepository) {
         this.finderPhoto = finderPhoto;
+        this.photoRepository = photoRepository;
     }
 
-    @GetMapping("/")
-    public String next(ModelAndView model) throws IOException {
-        finderPhoto.findPhoto();
-        model.addObject("message", "omen");
-        return "next";
+    @GetMapping("/check")
+    public ResponseEntity next() {
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping("/checkDuplicate")
-    public String checkDuplicate(ModelAndView model) throws IOException {
-        finderPhoto.checkDuplicate();
-        model.addObject("message", "omen");
-        return "next";
+    @GetMapping("/test")
+    public ResponseEntity test() {
+        return null;
+    }
+    @CrossOrigin(origins = "*")
+    @GetMapping("/all")
+    public ResponseEntity<Iterable<Photo>> findAll() {
+        System.out.println(System.currentTimeMillis());
+        Iterable<Photo> listPhotos = photoRepository.findAll();
+        return ResponseEntity.ok(listPhotos);
     }
 
 }

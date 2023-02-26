@@ -5,6 +5,7 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 import ua.gm.interfaces.FinderPhoto;
 import ua.gm.interfaces.PhotoRepository;
 import ua.gm.model.Photo;
@@ -83,7 +84,7 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         return (name + size).hashCode();
     }
 
-    public void checkDuplicate() {
+    public ModelAndView checkDuplicate(ModelAndView model) {
         long startTime = new Date().getTime();
 //        File folder = new File("/Users/mac/Downloads");
         File folder = new File("/Users/mac/IdeaProjects/spring-boot-demo/files/");
@@ -107,6 +108,8 @@ public class IosFinderPhotoImpl implements FinderPhoto {
             }
         }
         printTime(startTime, listDup.size());
+        model.addObject("size", listDup.size());
+        return model;
     }
 
 
