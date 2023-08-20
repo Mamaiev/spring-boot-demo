@@ -8,8 +8,11 @@ import java.util.List;
 
 public interface FinderPhoto {
 
-    void findPhoto() throws IOException;
+    void searchPhotos() throws IOException;
 
-    ModelAndView checkDuplicate(ModelAndView model);
+    void checkDuplicate();
+
+
+
 
 }

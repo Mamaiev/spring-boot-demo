@@ -1,6 +1,7 @@
 package ua.gm.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 //@Table(name = "photo")
 @Entity
@@ -41,11 +42,12 @@ public class Photo {
     }
 
     public void setLongitude(String longitude) {
-        if (longitude != null) {
-            this.longitude = longitude.replace(",", ".");
-        } else {
-            this.longitude = null;
-        }
+//        if (longitude != null) {
+//            this.longitude = longitude.replace(",", ".");
+//        } else {
+//            this.longitude = null;
+//        }
+        this.longitude = longitude;
     }
 
     public String getLatitude() {
@@ -53,11 +55,12 @@ public class Photo {
     }
 
     public void setLatitude(String latitude) {
-        if (latitude != null) {
-            this.latitude = latitude.replace(",", ".");
-        } else {
-            this.latitude = null;
-        }
+//        if (latitude != null) {
+//            this.latitude = latitude.replace(",", ".");
+//        } else {
+//            this.latitude = null;
+//        }
+        this.latitude = latitude;
     }
 
     public int getHash() {
@@ -74,5 +77,22 @@ public class Photo {
 
     public void setSize(Long size) {
         this.size = size;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Photo photo = (Photo) o;
+        return hash == photo.hash &&
+                name.equals(photo.name) &&
+                Objects.equals(longitude, photo.longitude) &&
+                Objects.equals(latitude, photo.latitude) &&
+                size.equals(photo.size);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, longitude, latitude, hash, size);
     }
 }

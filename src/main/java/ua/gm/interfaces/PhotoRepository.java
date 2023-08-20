@@ -7,4 +7,6 @@ import ua.gm.model.Photo;
 @Repository
 public interface PhotoRepository extends CrudRepository<Photo, Integer> {
 
+    @Override
+    <S extends Photo> Iterable<S> saveAll(Iterable<S> iterable);
 }

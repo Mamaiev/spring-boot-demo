@@ -25,7 +25,9 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         this.photoRepository = photoRepository;
     }
 
-    public void findPhoto() throws IOException {
+    private final static String FOLDER_PATTERN = ".*\\.(J|j|H|h)?(P|p|E|e)?(G|g|I|i)?(C|c){0,1}";
+
+    public void searchPhotos() throws IOException {
         long startTime = new Date().getTime();
 //        File folder = new File("/Users/mac/Downloads");
         File folder = new File("/Users/mac/IdeaProjects/spring-boot-demo/files/");
@@ -35,7 +37,7 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         List<String> listOfFiles = new ArrayList<>();
         File file = null;
         List<Photo> list = new ArrayList<>();
-        searchPathToFile(".*\\.(J|j|H|h)?(P|p|E|e)?(G|g|I|i)?(C|c){0,1}", folder, listOfFiles);
+        searchPathToFile(FOLDER_PATTERN, folder, listOfFiles);
         Photo photo = new Photo();
         for (String path : listOfFiles) {
             photo = new Photo();
@@ -84,7 +86,7 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         return (name + size).hashCode();
     }
 
-    public ModelAndView checkDuplicate(ModelAndView model) {
+    public void checkDuplicate() {
         long startTime = new Date().getTime();
 //        File folder = new File("/Users/mac/Downloads");
         File folder = new File("/Users/mac/IdeaProjects/spring-boot-demo/files/");
@@ -94,7 +96,7 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         List<String> listOfFiles = new ArrayList<>();
         File file = null;
         List<Photo> list = new ArrayList<>();
-        searchPathToFile(".*\\.(J|j|H|h)?(P|p|E|e)?(G|g|I|i)?(C|c){0,1}", folder, listOfFiles);
+        searchPathToFile(FOLDER_PATTERN, folder, listOfFiles);
         List<String> listDup = new ArrayList<>();
         for (String path : listOfFiles) {
             Photo photo = new Photo();
@@ -108,8 +110,6 @@ public class IosFinderPhotoImpl implements FinderPhoto {
             }
         }
         printTime(startTime, listDup.size());
-        model.addObject("size", listDup.size());
-        return model;
     }
 
 
