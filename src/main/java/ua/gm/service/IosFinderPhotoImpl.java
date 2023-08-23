@@ -21,11 +21,14 @@ public class IosFinderPhotoImpl implements FinderPhoto {
 
     private PhotoRepository photoRepository;
 
-    public IosFinderPhotoImpl(PhotoRepository photoRepository) {
+    private ProcessingService processingService;
+
+    public IosFinderPhotoImpl(PhotoRepository photoRepository, ProcessingService processingService) {
         this.photoRepository = photoRepository;
+        this.processingService = processingService;
     }
 
-    private final static String FOLDER_PATTERN = ".*\\.(J|j|H|h)?(P|p|E|e)?(G|g|I|i)?(C|c){0,1}";
+
 
     public void searchPhotos() throws IOException {
         long startTime = new Date().getTime();
@@ -37,7 +40,7 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         List<String> listOfFiles = new ArrayList<>();
         File file = null;
         List<Photo> list = new ArrayList<>();
-        searchPathToFile(FOLDER_PATTERN, folder, listOfFiles);
+        listOfFiles = processingService.searchPathToFile(folder, listOfFiles);
         Photo photo = new Photo();
         for (String path : listOfFiles) {
             photo = new Photo();
@@ -67,21 +70,6 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         printTime(startTime, list.size());
     }
 
-    private void searchPathToFile(final String pattern, final File folder, List<String> result) {
-        for (final File f : folder.listFiles()) {
-
-            if (f.isDirectory()) {
-                searchPathToFile(pattern, f, result);
-            }
-
-            if (f.isFile()) {
-                if (f.getName().matches(pattern)) {
-                    result.add(f.getAbsolutePath());
-                }
-            }
-        }
-    }
-
     private int hash(String name, long size){
         return (name + size).hashCode();
     }
@@ -96,7 +84,7 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         List<String> listOfFiles = new ArrayList<>();
         File file = null;
         List<Photo> list = new ArrayList<>();
-        searchPathToFile(FOLDER_PATTERN, folder, listOfFiles);
+        listOfFiles = processingService.searchPathToFile(folder, listOfFiles);
         List<String> listDup = new ArrayList<>();
         for (String path : listOfFiles) {
             Photo photo = new Photo();

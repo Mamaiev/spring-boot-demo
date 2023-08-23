@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ua.gm.dto.PhotoDto;
 import ua.gm.interfaces.FinderPhoto;
@@ -60,5 +61,14 @@ public class IndexController {
 //        finderPhoto.checkDuplicate();
 //        return ResponseEntity.ok();
 //    }
+
+    @GetMapping("/countPhotos")
+    public ResponseEntity countPhotos(@RequestParam(name = "path", required = false) String path){
+
+        path = "/Users/mac/IdeaProjects/spring-boot-demo/files/";
+        Integer count = processingService.countPhotos(path);
+
+        return ResponseEntity.ok(count);
+    }
 
 }
