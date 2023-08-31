@@ -3,7 +3,7 @@ package ua.gm.model;
 import javax.persistence.*;
 import java.util.Objects;
 
-//@Table(name = "photo")
+@Table(name = "photo")
 @Entity
 public class Photo {
 

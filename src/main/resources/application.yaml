@@ -1,0 +1,30 @@
+spring:
+  profiles: local
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: 'jdbc:mysql://localhost:3306/photos?serverTimezone=UTC'
+    username: root
+    password: rootroot
+    driver-class-name: 'com.mysql.cj.jdbc.Driver'
+  jpa:
+    show-sql: true
+name: local
+enviroment: local
+enable: true
+
+---
+spring:
+  profiles: docker
+  datasource:
+    url: 'jdbc:mysql://mysql-app:3306/photos?serverTimezone=UTC'
+    username: root
+    password: rootroot
+    driver-class-name: 'com.mysql.cj.jdbc.Driver'
+config:
+  activate:
+    on-profile: docker
+name: docker
+environment: docker
+enabled: false

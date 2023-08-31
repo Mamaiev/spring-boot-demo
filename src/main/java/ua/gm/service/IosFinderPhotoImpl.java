@@ -5,7 +5,6 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 import ua.gm.interfaces.FinderPhoto;
 import ua.gm.interfaces.PhotoRepository;
 import ua.gm.model.Photo;
@@ -27,8 +26,6 @@ public class IosFinderPhotoImpl implements FinderPhoto {
         this.photoRepository = photoRepository;
         this.processingService = processingService;
     }
-
-
 
     public void searchPhotos() throws IOException {
         long startTime = new Date().getTime();

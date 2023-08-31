@@ -50,11 +50,11 @@ public class IndexController {
         return ResponseEntity.ok(result);
     }
 
-//    @GetMapping("/searchPhotos")
-//    public ResponseEntity findPhotos() throws IOException {
-//        finderPhoto.searchPhotos();
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
+    @GetMapping("/searchPhotos")
+    public ResponseEntity findPhotos() throws IOException {
+        finderPhoto.searchPhotos();
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 //
 //    @GetMapping("/checkDuplicate")
 //    public ResponseEntity.BodyBuilder checkDuplicate() throws IOException {
