@@ -15,8 +15,23 @@ Run container and put into network:
 docker run --network my-network --name springboot-container -p 8080:8080 springboot-app
 // profile could be set in param of this script, need just add -e "SPRING_PROFILES_ACTIVE=test"
 
+Build image with react application
+docker build -t react-app .
+
+Run container with react application in it mode and put into network
+docker run -it --network my-network --name react-container -p 3000:3000 react-app
+// -it must be. With out -it doesn't work
 
 
 TODO:
 
-add db a file for create database and maybe tables
+add db a file for create database and maybe tables for auto generation:
+Create database photos;
+
+-----CREATING TABLE PHOTO -----------------------------
+
+INSERT INTO photos.photo (id, hash, latitude, longitude, name, size) VALUES (1, 1108232554, null, null, 'photo_2020-03-24_18-11-45.jpg', 88848);
+INSERT INTO photos.photo (id, hash, latitude, longitude, name, size) VALUES (2, 475688187, null, null, 'photo_2020-09-26_14-10-13.jpg', 252039);
+INSERT INTO photos.photo (id, hash, latitude, longitude, name, size) VALUES (3, -1199036722, '50° 27'' 23,98"', '30° 29'' 34,26"', 'IMG_7228.JPG', 2182843);
+INSERT INTO photos.photo (id, hash, latitude, longitude, name, size) VALUES (4, -1069954003, '50° 27'' 23,98"', '30° 29'' 34,26"', 'IMG_7229.JPG', 2182843);
+INSERT INTO photos.photo (id, hash, latitude, longitude, name, size) VALUES (5, 277959988, '48° 54'' 28,61"', '24° 41'' 44,93"', 'IMG_1891.JpG', 386106);
