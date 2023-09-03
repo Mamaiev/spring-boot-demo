@@ -18,7 +18,7 @@ enable: true
 spring:
   profiles: docker
   datasource:
-    url: 'jdbc:mysql://mysql-cont:3306/photos?serverTimezone=UTC'
+    url: 'jdbc:mysql://spring-boot-demo-db-1:3306/photos?serverTimezone=UTC'
     username: root
     password: root
     driver-class-name: 'com.mysql.cj.jdbc.Driver'
