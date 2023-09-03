@@ -7,6 +7,7 @@ import ua.gm.model.Photo;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ProcessingService {
@@ -53,10 +54,11 @@ public class ProcessingService {
     }
 
     List<String> searchPathToFile(final File folder, List<String> result) {
-        if (result == null || result.isEmpty()) {
+        if (result == null || result.isEmpty() || folder == null || folder.listFiles() == null) {
             result = new ArrayList<>();
+            return result;
         }
-        for (final File f : folder.listFiles()) {
+        for (final File f : Objects.requireNonNull(folder.listFiles())) {
 
             if (f.isDirectory()) {
                 searchPathToFile(f, result);
