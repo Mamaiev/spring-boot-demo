@@ -2,6 +2,7 @@ version: '3.8'
 services:
   db:
     image: mysql:8.0.19
+    container_name: mysql-cont
     environment:
       - 'MYSQL_ROOT_PASSWORD=root'
     networks:
@@ -10,13 +11,14 @@ services:
       - '3306:3306'
     volumes:
       - '/Users/mac/IdeaProjects/spring-boot-demo/src/main/resources/db/:/docker-entrypoint-initdb.d'
-    depends_on:
-      - frontend
   backend:
     build:
       context: '/Users/mac/IdeaProjects/spring-boot-demo'
       dockerfile: 'Dockerfile'
     image: 'springboot-img:v0.1'
+    container_name: springboot-cont
+    restart:
+      on-failure:5
     networks:
       - 'photo-network'
     depends_on:
@@ -28,6 +30,7 @@ services:
       context: '/Users/mac/IdeaProjects/Photos'
       dockerfile: 'Dockerfile'
     image: 'react-img:v0.1'
+    container_name: react-cont
     networks:
       - 'photo-network'
     ports:
